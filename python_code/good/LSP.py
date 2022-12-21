@@ -11,10 +11,10 @@ class FreeMan(object):
     def __init__(self, position):
         self.position = position
 
-    def walk_North(self, dist):
+    def walk_north(self, dist):
         self.position[1] += dist
 
-    def walk_East(self, dist):
+    def walk_east(self, dist):
         self.position[0] += dist
 
 # "is-a" relationship no longer holds since a `Prisoner` is not a `FreeMan`.
@@ -35,7 +35,7 @@ def main():
     try:
         prisoner.walk_North(10)
         prisoner.walk_East(-3)
-    except:
+    except KeyboardInterrupt:
         pass
 
     print("The location of the prison: {}".format(prisoner.PRISON_LOCATION))
