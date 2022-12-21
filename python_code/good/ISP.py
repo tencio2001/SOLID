@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 
 # In this implementation, we break `AbstractWorker` into two seperate abstract
-# classes, `Workable` and `Eatable`, then we can seperate normal worker from 
+# classes, `Workable` and `Eatable`, then we can seperate normal worker from
 # robot. As a result, we don't need to implement `eat` method in robot anymore.
 
 from abc import ABCMeta, abstractmethod
 import time
+
 
 class Workable(object):
     __metaclass__ = ABCMeta
@@ -15,6 +16,7 @@ class Workable(object):
     def work(self):
         pass
 
+
 class Eatable(object):
     __metaclass__ = ABCMeta
 
@@ -22,8 +24,10 @@ class Eatable(object):
     def eat(self):
         pass
 
+
 class AbstractWorker(Workable, Eatable):
     pass
+
 
 class Worker(AbstractWorker):
 
@@ -33,6 +37,7 @@ class Worker(AbstractWorker):
     def eat(self):
         print("Lunch break....(5 secs)")
         time.sleep(5)
+
 
 class SuperWorker(AbstractWorker):
 
@@ -49,31 +54,37 @@ class Manager(object):
     def __init__(self):
         self.worker = None
 
+
 class WorkManager(Manager):
 
     def set_worker(self, worker):
-        assert isinstance(worker, Workable), "`worker` must be of type {}".format(Workable)
+        assert isinstance(
+            worker, Workable), "`worker` must be of type {}".format(Workable)
 
         self.worker = worker
 
     def manage(self):
         self.worker.work()
 
+
 class BreakManager(Manager):
 
     def set_worker(self, worker):
-        assert isinstance(worker, Eatable), "`worker` must be of type {}".format(Eatable)
+        assert isinstance(
+            worker, Eatable), "`worker` must be of type {}".format(Eatable)
         self.worker = worker
 
     def lunch_break(self):
         self.worker.eat()
+
 
 class Robot(Workable):
 
     def work(self):
         print("I'm a robot. I'm working....")
 
-    # No need for implementation of `eat` which is not neccessary for a `Robot`. 
+    # No need for implementation of `eat` which is not neccessary for a `Robot`.
+
 
 def main():
 
@@ -99,7 +110,7 @@ def main():
         break_manager.lunch_break()
     except KeyboardInterrupt:
         pass
-    
+
+
 if __name__ == '__main__':
     main()
-
